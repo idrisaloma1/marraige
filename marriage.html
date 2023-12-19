@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriage App</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 50px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Marriage App</h1>
+        <form id="marriageForm">
+            <div class="form-group">
+                <label for="age">Enter Age:</label>
+                <input type="number" class="form-control" id="age" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="checkEligibility()">Check Eligibility</button>
+        </form>
+
+        <div id="result" class="text-center"></div>
+        <div id="errorMessage" class="error-message text-center"></div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        function checkEligibility() {
+            const age = parseInt(document.getElementById('age').value);
+
+            try {
+                if (age > 40) {
+                    throw new Error("With your age, you need special attention. Consult the counselling unit, dial +2348072889844 for more guidance");
+                } else if (age < 18) {
+                    throw new Error("Please wait for a few more years, concentrate on your studies, get a suitable and secure job before setting up for marriage. Dial this WhatsApp +2348072889844 for more counselling");
+                } else {
+                    const jobSecure = confirm("Is your job secure?");
+                    if (!jobSecure) {
+                        throw new Error("Your job is not secure, and that may affect your marriage prospects. Try to secure a job and intensify your Prayer, HASBUNALLAHU WANE'EMAL WAKIL");
+                    }
+
+                    const religion = prompt("What is your religion?").trim().toLowerCase();
+                    if (religion !== 'islam') {
+                        throw new Error("We are sorry, but our services are only available for those of the Islamic faith.");
+                    }
+
+                    const physicalDesirability = confirm("Are you physically desirable?");
+                    if (physicalDesirability) {
+                        throw new Error("Physical desirability is an important factor in finding a match. Take steps to improve your physical well-being, Dial +2348072889844 for more on health counselling");
+                    } else {
+                        document.getElementById('result').innerText = "You will get match details soon by email. Contact this number +2348072889844 on WhatsApp for more guidance";
+                    }
+                }
+                
+                document.getElementById('errorMessage').innerText = "";
+            } catch (error) {
+                document.getElementById('errorMessage').innerText = error.message;
+            }
+        }
+    </script>
+</body>
+</html>
